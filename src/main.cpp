@@ -60,7 +60,7 @@ int main()
         grid.GameOfLife();
 
         SDL_RenderPresent(rend);
-        SDL_Delay(1000 / 1);
+        SDL_Delay(1000 / 3);
     }
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(win);
