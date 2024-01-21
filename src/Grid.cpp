@@ -14,14 +14,14 @@ Grid::Grid(int w, int h)
         for (int j = 0; j < height; j++)
         {
             Block block;
-            int randomValue = rand() % 5; // Génère un nombre aléatoire entre 0 et 4
+            int randomValue = rand() % 5;
             if (randomValue == 0)
             {
-                block.setValue(1); // Définit la valeur du block à 1 si le nombre aléatoire est 0
+                block.setValue(1);
             }
             else
             {
-                block.setValue(0); // Définit la valeur du block à 0 si le nombre aléatoire est différent de 0
+                block.setValue(0);
             }
             temp.push_back(block);
         }
@@ -49,7 +49,6 @@ void Grid::draw(SDL_Renderer *rend)
 
             if (blocks[i][j].getValue() == 1)
             {
-                cout << i << " " << j << endl;
                 SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
                 SDL_RenderFillRect(rend, &rect);
             }
@@ -69,30 +68,24 @@ int Grid::getHeight()
 
 void Grid::GameOfLife()
 {
-    // On parcourt la grille
     for (int i = 0; i < width; i++)
     {
         for (int j = 0; j < height; j++)
         {
 
-            // On compte le nombre de voisins
             int nbVoisins = 0;
 
-            // On parcourt les voisins
             for (int k = -1; k < 2; k++)
             {
                 for (int l = -1; l < 2; l++)
                 {
 
-                    // On vérifie que le voisin n'est pas en dehors de la grille
                     if (i + k >= 0 && i + k < width && j + l >= 0 && j + l < height)
                     {
 
-                        // On vérifie que le voisin n'est pas le block lui-même
                         if (!(k == 0 && l == 0))
                         {
 
-                            // On vérifie que le voisin est vivant
                             if (blocks[i + k][j + l].getValue() == 1)
                             {
                                 nbVoisins++;
@@ -102,40 +95,34 @@ void Grid::GameOfLife()
                 }
             }
 
-            // On définit le nombre de voisins du block
             blocks[i][j].setNbVoisins(nbVoisins);
         }
     }
 
-    // On parcourt la grille
     for (int i = 0; i < width; i++)
     {
         for (int j = 0; j < height; j++)
         {
 
-            // On vérifie si le block est vivant
             if (blocks[i][j].getValue() == 1)
             {
 
-                // On vérifie si le block a moins de 2 voisins ou plus de 3 voisins
                 if (blocks[i][j].getNbVoisins() < 2 || blocks[i][j].getNbVoisins() > 3)
                 {
-                    blocks[i][j].setValue(0); // Le block meurt
+                    blocks[i][j].setValue(0);
                 }
             }
             else
             {
 
-                // On vérifie si le block a exactement 3 voisins
                 if (blocks[i][j].getNbVoisins() == 3)
                 {
-                    blocks[i][j].setValue(1); // Le block naît
+                    blocks[i][j].setValue(1);
                 }
             }
         }
     }
 
-    // On réinitialise le nombre de voisins de chaque block
     for (int i = 0; i < width; i++)
     {
         for (int j = 0; j < height; j++)
