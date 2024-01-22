@@ -23,7 +23,7 @@ A simple représentation of the Game of Life made in C++ with SDL2
 
 ## II) Download and compile  
 1. Open a terminal on the folder where you want to download the project and type : 
-   ```git clone https://github.com/Eclairsombre/GameOfLife.git```
+   ```git clone https://github.com/Eclairsombre/Game-of-life.git```
 2. After that , when files are downloaded , type on your terminal  in the same folder: 
    ```make```   
      
